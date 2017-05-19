@@ -1,2 +1,3 @@
 Possibly relevent articles:
-DOI: 10.1007/s00440-008-0164-8
+DOI: 10.1007/s00440-008-0164-8  on Brownian motion on cylinder
+https://arxiv.org/pdf/hep-th/9507147.pdf  on continuum limits of lattices
