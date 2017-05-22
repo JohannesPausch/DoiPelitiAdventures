@@ -1,0 +1,79 @@
+%        File: topological_reconstruction.tex
+%     Created: Mon May 22 09:00 am 2017 B
+% Last Change: Mon May 22 09:00 am 2017 B
+%
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\usepackage{appendix}
+\usepackage{geometry}
+
+\usepackage{fancyhdr}
+\geometry{margin=1in}   
+\usepackage{graphicx}
+
+\usepackage{mathpazo}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[makeroom]{cancel}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}{Lemma}
+
+\usepackage{url}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1em}
+\title{Topological reconstruction from stochastic data with the help of Doi-Peliti-formalism}
+\author{Benjamin Walter}
+
+\begin{document}
+\maketitle 
+\begin{abstract}
+We investigate the relationship between the stochastic generator, the underlying topological space, and averaged observables of a stochastic process in both its discrete setting (Master-equation) and its continuous, field-theoretic description (Doi-Peliti)
+\end{abstract}
+
+\section{Stochastic Processes}
+\begin{definition}[Stochastic Process]
+	Let $(\Omega, \mathcal{F}, \mathbb{P})$ be probability space, $(X, \Sigma(X))$ be a measurable space (wrt sigma-algebra). A stochastic process is a $\mathbb{R}$/time parametrised collection of continuous random variables $\left\{ x_t(\omega) : T\times \Omega \to X \right\}$, where $T$ is an index set (preferably $\mathbb{R}^+$). This pushes forward a probability measure $\mathcal{P}$ on $X$ via $\mathcal{P}\left[ x(t) \in \mathcal{A} \right] = \mathbb{P}\left[ x^{-1}_t(\mathcal{A}) \right]$ for all $\mathcal{A} \in \Sigma(X)$.
+\end{definition}
+
+In statistical field theory, $X$ almost always is a regular lattice, and almost as often as that a square lattice with regular spacing $a$. For time being, we therefore only consider $X=a \mathbb{Z}^d$ for some $d$. On this discrete space, the corresponding $\sigma$-algebra is a collection of points and therefore $\mathcal{P}$ is entirely described by its values on each lattice site, that is $p(\mathbf{x})$ where $\mathbf{x}$ is some element in $X$. We are now interested in the evolution of $p(\mathbf{x})$ over time. To avoid technical concerns, we assume a kind behaviour of $p$ wrt whatever $T$ is.
+
+We assume for now that $T$ is $\delta t \cdot \mathbb{Z}$. We demand some sort of map that takes $\cup_{t'\leq t} p_{t'}(\mathbf{x})$ and maps it to $p_{t+\delta t}(x)$, that is an entire knowledge of the past enables us to predict the evolution of the probability distribution. This is a quite generous demand that might be interesting later when we start discussing non-Markovian setups. For now, we restrict ourselves to processes where it is actually sufficient to know the present, that is we look for maps of the kind $M: p_t(x) \to p_{t+\delta t}(x)$. Also, we assume stationarity, i.e. the evolution does not explicitly depend on time.
+
+Further, we are interested in local theories. A theory is local when the evolution of a state/probability at a point only depends on nearer neighbours for shorter times where ``nearer'' and ``shorter'' are to be understood in terms of $X$ and $T$. 
+
+A discrete, markovian, stationary and local theory can be described by a Master-equation of the form
+\begin{align}
+	p_{t+\delta t}(x) - p_t(x) = \sum_{x' \in V(x)}^{} M_{x',x} p_t(x') - p(x) \sum_{x' \in V(x)}^{} M_{x,x'}
+	\label{master_equation}
+\end{align}
+where $M_{x,y}$ is some positive number that is physically interpreted as the transition rate of particles to move from $x$ to $y$, and where $V(x)$ is a vicinity of $x$ that encapsules locality. This can be written as a linear operator $M: \mu_P(X) \to \mu_P(X)$ that maps the space of probability measures onto itself. We refer to $M$ as the 	\textit{local update rule}. 
+
+Equipped with a point-measure, we now construct a path-measure. Consider therefore $\Gamma_X^{\ell}$ the set of all paths on $X$ of finite length. Each path has weight
+\begin{align}
+	\mathcal{P}[x(t)] = \prod_{t_i} p_{t_i}(x_{t_i}) = \prod_i (1+M)^i p_{t_0}(x_{t_i})
+	\label{}
+\end{align}
+
+Last we consider ``measurements''. For any sufficiently fast decaying function $f:X \to \mathbb{R}$ or $F: \Gamma_X^{\ell} \to \mathbb{R}$, we define $\langle f^n\rangle(t) = \sum_{x \in X}^{} f(x)^{n} p_t(x)$ and $\langle F^n\rangle(t) = \sum_{x(t) \in \Gamma_X^l}^{} F[x(t)]^n \mathcal{P}[x(t)]$. In a slightly deeper spirit, these observables are the only object we can measure and therefore the only positive real thing.
+
+Within this framework, there are thus 3 components that are chosen by the ``experimentator'' / ``observer'' / nature: A topological space $X$, a local update rule $M$, and measurements of $f$. 
+
+\textbf{Question:} Given $\langle f^n \rangle$ and $M$, what is possible to say about $X$? What additional structures are sensible to impose?
+
+\section{Further}
+One section about the continuum limit, choices we face when deciding in the case of a Random walk whether $a / \delta t$ or $ a^2/\delta t$ is kept finite.
+
+Then, we also go from $\mu_X$ into $L^2(X)$ (reduction of possible probability measures, but Hilbert-structure gives much more back), Then $M$ becomes $\mathcal{L}$, the Liouvillian or Fokker-Planck-operator, $\mathcal{L}$ has a spectrum, eigenfunctions etc. all observables can be expressed in eigenfunctions. Thus knowing $\mathcal{L}$ and measuring $f$, we may be able to reconstruct eigenfunctions, then we know things about $X$.
+
+\end{document}
+
+
+
